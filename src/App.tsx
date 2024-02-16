@@ -12,7 +12,7 @@ import MainComponentArea from "./components/MainComponentArea";
 import { Transforms } from "slate";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -27,9 +27,10 @@ function App() {
   };
 
   return (
-    <div className={`flex relative min-h-screen ${darkMode ? "bg-gray-900" : "bg-gray-200"}`}> {/* darkMode conditional can be added here */}      
+    <div className={`flex relative min-h-screen ${darkMode ? "bg-gray-200" : "bg-gray-500"}`}> {/* darkMode conditional can be added here */}      
       <div className="flex flex-col w-full"> {/* Main Area with margin for the sidebar */}
         <AppHeader darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        <MainComponentArea darkMode={darkMode} />
       </div>
     </div>
   );
