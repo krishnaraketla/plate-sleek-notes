@@ -20,8 +20,14 @@ const plugins = createPlugins(
   ];
   
   const PlateEditor : React.FC = () => {
+
+    const onChange = (newValue: any) => {
+        console.log(JSON.stringify(newValue, null, 2));
+      };
+
+      
     return (
-        <Plate plugins={plugins} initialValue={initialValue}>
+        <Plate plugins={plugins} initialValue={initialValue} onChange={onChange}>
           <PlateContent />
         </Plate>
       );
