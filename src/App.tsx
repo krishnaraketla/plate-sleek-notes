@@ -27,7 +27,7 @@ function App() {
   };
 
   return (
-    <div className={`flex relative min-h-screen ${darkMode ? "bg-gray-200" : "bg-gray-500"}`}> {/* darkMode conditional can be added here */}      
+    <div className={`flex relative min-h-screen ${darkMode ? "bg-gray-100" : "bg-gray-100"}`}> {/* darkMode conditional can be added here */}      
       <div className="flex flex-col w-full"> {/* Main Area with margin for the sidebar */}
         <AppHeader darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
         <MainComponentArea darkMode={darkMode} />
