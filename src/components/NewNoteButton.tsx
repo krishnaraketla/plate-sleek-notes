@@ -1,14 +1,12 @@
 import React from 'react';
-import { BiSolidPlusSquare } from "react-icons/bi";
+import { BiNote } from "react-icons/bi"; // Import a note icon from react-icons
 
-
-const NewNoteButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
-    return (
-      <button onClick={onClick} className="bg-blue-500 text-white px-4 py-2 rounded flex items-center">
-        <BiSolidPlusSquare className="mr-2" />
-      </button>
-    );
-  };
-  
+const NewNoteButton: React.FC = () => {
+  return (
+    <button className="focus:outline-none">
+      <BiNote className="text-2xl"/> {/* Adjusted the icon size for better visual */}
+    </button>
+  );
+};
 
 export default NewNoteButton;
