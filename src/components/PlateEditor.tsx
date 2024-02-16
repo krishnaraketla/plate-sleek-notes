@@ -21,28 +21,88 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
 
-import { HrElement } from '@/components/plate-ui/hr-element';
-import { HeadingElement } from '@/components/plate-ui/heading-element';
-import { ParagraphElement } from '@/components/plate-ui/paragraph-element';
-import { TableElement } from '@/components/plate-ui/table-element';
-import { TableCellElement, TableCellHeaderElement } from '@/components/plate-ui/table-cell-element';
-import { TableRowElement } from '@/components/plate-ui/table-row-element';
-import { KbdLeaf } from '@/components/plate-ui/kbd-leaf';
-import { Editor } from '@/components/plate-ui/editor';
-import { FixedToolbar } from '@/components/plate-ui/fixed-toolbar';
-import { FixedToolbarButtons } from '@/components/plate-ui/fixed-toolbar-buttons';
-import { FloatingToolbar } from '@/components/plate-ui/floating-toolbar';
-import { FloatingToolbarButtons } from '@/components/plate-ui/floating-toolbar-buttons';
-import { withPlaceholders } from '@/components/plate-ui/placeholder';
-import { withDraggables } from '@/components/plate-ui/with-draggables';
+import { HrElement } from 'src/@/components/plate-ui/hr-element';
+import { HeadingElement } from 'src/@/components/plate-ui/heading-element';
+import { ParagraphElement } from 'src/@/components/plate-ui/paragraph-element';
+import { TableElement } from 'src/@/components/plate-ui/table-element';
+import { TableCellElement, TableCellHeaderElement } from 'src/@/components/plate-ui/table-cell-element';
+import { TableRowElement } from 'src/@/components/plate-ui/table-row-element';
+import { KbdLeaf } from 'src/@/components/plate-ui/kbd-leaf';
+import { Editor } from 'src/@/components/plate-ui/editor';
+import { FixedToolbar } from 'src/@/components/plate-ui/fixed-toolbar';
+import { FixedToolbarButtons } from 'src/@/components/plate-ui/fixed-toolbar-buttons';
+import { FloatingToolbar } from 'src/@/components/plate-ui/floating-toolbar';
+import { FloatingToolbarButtons } from 'src/@/components/plate-ui/floating-toolbar-buttons';
+import { withPlaceholders } from 'src/@/components/plate-ui/placeholder';
+import { withDraggables } from 'src/@/components/plate-ui/with-draggables';
 
 const plugins = createPlugins(
     [
-  
+      createParagraphPlugin(),
+      createHeadingPlugin(),
+      createHorizontalRulePlugin(),
+      createTablePlugin(),
+      createBoldPlugin(),
+      createItalicPlugin(),
+      createUnderlinePlugin(),
+      createStrikethroughPlugin(),
+      createSubscriptPlugin(),
+      createSuperscriptPlugin(),
+      createKbdPlugin(),
+      createDndPlugin({
+          options: { enableScroller: true },
+      }),
+      createResetNodePlugin({
+        options: {
+          rules: [
+            // Usage: https://platejs.org/docs/reset-node
+          ],
+        },
+      }),
+      createDeletePlugin(),
+      createSoftBreakPlugin({
+        options: {
+          rules: [
+            { hotkey: 'shift+enter' },
+            {
+              hotkey: 'enter',
+              query: {
+                allow: [
+                  // ELEMENT_CODE_BLOCK, ELEMENT_BLOCKQUOTE, ELEMENT_TD
+                ],
+              },
+            },
+          ],
+        },
+      }),
+      createTabbablePlugin(),
+      createDeserializeDocxPlugin(),
+      createDeserializeCsvPlugin(),
+      createDeserializeMdPlugin(),
+      createJuicePlugin(),
     ],
     {
-      components: {
-      },
+      components: withDraggables(withPlaceholders({
+        [ELEMENT_HR]: HrElement,
+        [ELEMENT_H1]: withProps(HeadingElement, { variant: 'h1' }),
+        [ELEMENT_H2]: withProps(HeadingElement, { variant: 'h2' }),
+        [ELEMENT_H3]: withProps(HeadingElement, { variant: 'h3' }),
+        [ELEMENT_H4]: withProps(HeadingElement, { variant: 'h4' }),
+        [ELEMENT_H5]: withProps(HeadingElement, { variant: 'h5' }),
+        [ELEMENT_H6]: withProps(HeadingElement, { variant: 'h6' }),
+        [ELEMENT_PARAGRAPH]: ParagraphElement,
+        [ELEMENT_TABLE]: TableElement,
+        [ELEMENT_TR]: TableRowElement,
+        [ELEMENT_TD]: TableCellElement,
+        [ELEMENT_TH]: TableCellHeaderElement,
+        [MARK_BOLD]: withProps(PlateLeaf, { as: 'strong' }),
+        [MARK_ITALIC]: withProps(PlateLeaf, { as: 'em' }),
+        [MARK_KBD]: KbdLeaf,
+        [MARK_STRIKETHROUGH]: withProps(PlateLeaf, { as: 's' }),
+        [MARK_SUBSCRIPT]: withProps(PlateLeaf, { as: 'sub' }),
+        [MARK_SUPERSCRIPT]: withProps(PlateLeaf, { as: 'sup' }),
+        [MARK_UNDERLINE]: withProps(PlateLeaf, { as: 'u' }),
+      })),
     }
   );
 
@@ -54,17 +114,28 @@ const plugins = createPlugins(
     },
   ];
   
-  const PlateEditor : React.FC = () => {
+  export function PlateEditor() {
 
     const onChange = (newValue: any) => {
         console.log(JSON.stringify(newValue, null, 2));
       };
 
-      
+
     return (
+      <DndProvider backend={HTML5Backend}>
         <Plate plugins={plugins} initialValue={initialValue} onChange={onChange}>
-          <PlateContent />
+          <FixedToolbar>
+            <FixedToolbarButtons />
+          </FixedToolbar>
+          
+          <Editor />
+          
+          <FloatingToolbar>
+            <FloatingToolbarButtons />
+          </FloatingToolbar>
         </Plate>
-      );
+      </DndProvider>
+    );
   }
+
   export default PlateEditor;

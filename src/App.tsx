@@ -10,6 +10,7 @@ import AppHeader from "./components/AppHeader";
 import NotebookSidebar from './components/NotebookSidebar';
 import MainComponentArea from "./components/MainComponentArea";
 import { Transforms } from "slate";
+import { TooltipProvider } from "@radix-ui/react-tooltip";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -29,8 +30,10 @@ function App() {
   return (
     <div className={`flex relative min-h-screen ${darkMode ? "bg-gray-100" : "bg-gray-100"}`}> {/* darkMode conditional can be added here */}      
       <div className="flex flex-col w-full"> {/* Main Area with margin for the sidebar */}
+      <TooltipProvider>
         <AppHeader darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
         <MainComponentArea darkMode={darkMode} />
+       </TooltipProvider> 
       </div>
     </div>
   );
