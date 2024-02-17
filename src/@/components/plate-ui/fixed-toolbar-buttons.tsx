@@ -54,9 +54,6 @@ export function FixedToolbarButtons() {
               >
                 <Icons.strikethrough />
               </MarkToolbarButton>
-              <MarkToolbarButton tooltip="Code (⌘+E)" nodeType={MARK_CODE}>
-                <Icons.code />
-              </MarkToolbarButton>
             </ToolbarGroup>
           </>
         )}

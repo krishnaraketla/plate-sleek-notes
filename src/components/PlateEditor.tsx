@@ -29,6 +29,7 @@ import { TableCellElement, TableCellHeaderElement } from 'src/@/components/plate
 import { TableRowElement } from 'src/@/components/plate-ui/table-row-element';
 import { KbdLeaf } from 'src/@/components/plate-ui/kbd-leaf';
 import { Editor } from 'src/@/components/plate-ui/editor';
+import { EditorGhost } from 'src/@/components/plate-ui/editor-ghost';
 import { FixedToolbar } from 'src/@/components/plate-ui/fixed-toolbar';
 import { FixedToolbarButtons } from 'src/@/components/plate-ui/fixed-toolbar-buttons';
 import { FloatingToolbar } from 'src/@/components/plate-ui/floating-toolbar';
@@ -110,7 +111,7 @@ const plugins = createPlugins(
     {
       id: '1',
       type: 'p',
-      children: [{ text: 'Hello, World!' }],
+      children: [{ text: 'This is a Plate Editor' }],
     },
   ];
   
@@ -130,9 +131,6 @@ const plugins = createPlugins(
           
           <Editor />
           
-          <FloatingToolbar>
-            <FloatingToolbarButtons />
-          </FloatingToolbar>
         </Plate>
       </DndProvider>
     );

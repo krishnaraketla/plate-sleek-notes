@@ -36,7 +36,7 @@ const editorVariants = cva(
       },
     },
     defaultVariants: {
-      variant: 'outline',
+      variant: 'ghost',
       focusRing: true,
       size: 'sm',
     },
@@ -61,7 +61,7 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
     ref
   ) => {
     return (
-      <div ref={ref} className="relative w-full">
+      <div ref={ref} className="mt-[0px] p-1">
         <PlateContent
           className={cn(
             editorVariants({

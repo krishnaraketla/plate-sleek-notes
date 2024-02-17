@@ -18,7 +18,7 @@
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@udecode/cn": "^29.0.1",
-    "@udecode/plate": "^30.5.0",
+    "@udecode/plate": "^30.5.2",
     "@udecode/plate-basic-marks": "^30.4.5",
     "@udecode/plate-block-quote": "^30.4.5",
     "@udecode/plate-break": "^30.4.5",
